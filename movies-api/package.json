@@ -1,0 +1,30 @@
+{
+  "name": "movies-api",
+  "version": "1.0.0",
+  "description": "Api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "SET DEBUG=platziverse:* && nodemon index.js",
+    "start": "NODE_ENV=production node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emersonpalacio/video-api.git"
+  },
+  "author": "Emerson-palacio-otalvaro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emersonpalacio/video-api/issues"
+  },
+  "homepage": "https://github.com/emersonpalacio/video-api#readme",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7"
+  }
+}
