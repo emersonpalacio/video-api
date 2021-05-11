@@ -1,14 +1,18 @@
 const { Router } = require("express");
 const express = require("express");
-const { moviesMock } = require("../utils/mocks/movies");
+const MoviesServices = require("../services/movies");
 
 function moviesApi(app) {
   const router = express.Router();
   app.use("/api/movies", router);
 
+  const moviesServices = new MoviesServices();
+
   router.get("/", async function (req, res, next) {
+    const { tags } = req.query;
+
     try {
-      const movies = await Promise.resolve(moviesMock);
+      const movies = await moviesServices.getMovies({ tags });
       res.status(200).json({
         data: movies,
         message: "movies listed",
@@ -19,8 +23,9 @@ function moviesApi(app) {
   });
 
   router.get("/:moviId", async function (req, res, next) {
+    const { moviId } = req.params;
     try {
-      const movies = await Promise.resolve(moviesMock[0]);
+      const movies = await moviesServices.getMovie({ moviId });
       res.status(201).json({
         data: movies,
         message: "movies",
@@ -31,8 +36,9 @@ function moviesApi(app) {
   });
 
   router.post("/", async function (req, res, next) {
+    const { body: movie } = req;
     try {
-      const createMovieId = await Promise.resolve(moviesMock[0].id);
+      const createMovieId = await moviesServices.createMovie({ movie });
       res.status(200).json({
         data: createMovieId,
         message: "Movies Created",
@@ -43,8 +49,13 @@ function moviesApi(app) {
   });
 
   router.put("/:moviId", async function (req, res, next) {
+    const { moviId } = req.params;
+    const { body: movie } = req;
     try {
-      const updateMoviesid = await Promise.resolve(moviesMock[0].id);
+      const updateMoviesid = await moviesServices.updateMovie({
+        moviId,
+        movie,
+      });
       res.status(200).json({
         data: updateMoviesid,
         message: "movies update",
@@ -55,8 +66,10 @@ function moviesApi(app) {
   });
 
   router.delete("/:moviId", async function (req, res, next) {
+    const { moviId } = req.params;
+
     try {
-      const deleteMovie = await Promise.resolve(moviesMock[0].id);
+      const deleteMovie = await moviesServices.deleteMovie({ moviId });
       res.status(200).json({
         data: deleteMovie,
         message: "delete movie ",
