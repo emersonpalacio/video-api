@@ -1,8 +1,8 @@
-const MongoLib = require("../lib/mongo");
+const MongoLib = require('../lib/mongo');
 
 class MoviesService {
   constructor() {
-    this.collection = "movies";
+    this.collection = 'movies';
     this.mongoDB = new MongoLib();
   }
 
